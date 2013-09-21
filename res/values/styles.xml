@@ -1,0 +1,182 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="AppTheme" parent="android:Theme.Holo.Light">
+        <item name="android:buttonStyle">@style/Theme.AppTheme.Widget.Button</item>
+        <item name="android:windowBackground">@color/window_bg</item>
+        <item name="android:background">#00F2F2EC</item>
+        <item name="android:actionBarStyle">@style/ActionBar</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="Theme.AppTheme.Widget.Button" parent="android:style/Widget.Button">
+        <item name="android:background">@color/normal_button_bg</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:textColor">@color/normal_button_text</item>
+        <item name="android:textSize">@dimen/norm_button_text</item>
+    </style>
+
+    <style name="ResultTheme" parent="android:style/Widget.EditText">
+        <item name="android:padding">5dp</item>
+        <item name="android:textSize">40sp</item>
+        <item name="android:background">@drawable/textfield_darkblue</item>
+        <item name="android:textColor">#fff</item>
+    </style>
+
+    <style name="norm_buttons" parent="Theme.AppTheme.Widget.Button"></style>
+
+    <style name="AdvBut" parent="android:style/Widget.Button">
+        <item name="android:background">@color/adv_button_bg</item>
+        <item name="android:textSize">@dimen/adv_button_text</item>
+        <item name="android:padding">@dimen/adv_button_padding</item>
+        <item name="android:textColor">@color/adv_button_text</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+
+    <style name="NormButLand" parent="Theme.AppTheme.Widget.Button">
+        <item name="android:padding">0dp</item>
+    </style>
+
+    <style name="ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@color/transparent</item>
+        <item name="android:titleTextStyle">@style/TitleText</item>
+        <item name="android:logo">@drawable/logo_default</item>
+        <item name="android:textColor">#35444f</item>
+    </style>
+
+    <style name="TitleText" parent="AppTheme">
+        <item name="android:textColor">#35444f</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:background">#00F2F2EC</item>
+    </style>
+
+    <!-- Second theme -->
+
+    <style name="AppThemeBlue" parent="android:Theme.Holo.Light">
+        <item name="android:buttonStyle">@style/ButtonBlue</item>
+        <item name="android:windowBackground">@color/window_bg</item>
+        <item name="android:background">#00F2F2EC</item>
+        <item name="android:actionBarStyle">@style/ActionBarBlue</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="ButtonBlue" parent="android:style/Widget.Button">
+        <item name="android:background">@color/normal_button_bg</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:textColor">@color/normal_button_text_blue</item>
+        <item name="android:textSize">@dimen/norm_button_text</item>
+    </style>
+
+    <style name="AdvButBlue" parent="android:style/Widget.Button">
+        <item name="android:background">@color/adv_button_bg_blue</item>
+        <item name="android:textSize">@dimen/adv_button_text</item>
+        <item name="android:padding">@dimen/adv_button_padding</item>
+        <item name="android:textColor">@color/adv_button_text_blue</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+
+    <style name="ActionBarBlue" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@color/transparent</item>
+        <item name="android:titleTextStyle">@style/TitleText</item>
+        <item name="android:logo">@drawable/logo_blue</item>
+        <item name="android:textColor">#35444f</item>
+    </style>
+
+
+    <!-- Third theme -->
+
+    <style name="AppThemeOrange" parent="android:Theme.Holo.Light">
+        <item name="android:buttonStyle">@style/ButtonOrange</item>
+        <item name="android:windowBackground">@color/window_bg</item>
+        <item name="android:background">#00F2F2EC</item>
+        <item name="android:actionBarStyle">@style/ActionBarOrange</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="ButtonOrange" parent="android:style/Widget.Button">
+        <item name="android:background">@color/normal_button_bg</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:textColor">@color/normal_button_text_orange</item>
+        <item name="android:textSize">@dimen/norm_button_text</item>
+    </style>
+
+    <style name="AdvButOrange" parent="android:style/Widget.Button">
+        <item name="android:background">@color/adv_button_bg_orange</item>
+        <item name="android:textSize">@dimen/adv_button_text</item>
+        <item name="android:padding">@dimen/adv_button_padding</item>
+        <item name="android:textColor">@color/adv_button_text_orange</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+
+    <style name="ActionBarOrange" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@color/transparent</item>
+        <item name="android:titleTextStyle">@style/TitleText</item>
+        <item name="android:logo">@drawable/logo_orange</item>
+        <item name="android:textColor">#35444f</item>
+    </style>
+
+    <!-- 4th theme -->
+
+    <style name="AppThemePurple" parent="android:Theme.Holo.Light">
+        <item name="android:buttonStyle">@style/ButtonPurple</item>
+        <item name="android:windowBackground">@color/window_bg</item>
+        <item name="android:background">#00F2F2EC</item>
+        <item name="android:actionBarStyle">@style/ActionBarPurple</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="ButtonPurple" parent="android:style/Widget.Button">
+        <item name="android:background">@color/normal_button_bg</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:textColor">@color/normal_button_text_purple</item>
+        <item name="android:textSize">@dimen/norm_button_text</item>
+    </style>
+
+    <style name="AdvButPurple" parent="android:style/Widget.Button">
+        <item name="android:background">@color/adv_button_bg_purple</item>
+        <item name="android:textSize">@dimen/adv_button_text</item>
+        <item name="android:padding">@dimen/adv_button_padding</item>
+        <item name="android:textColor">@color/adv_button_text_purple</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+
+    <style name="ActionBarPurple" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@color/transparent</item>
+        <item name="android:titleTextStyle">@style/TitleText</item>
+        <item name="android:logo">@drawable/logo_purple</item>
+        <item name="android:textColor">#35444f</item>
+    </style>
+    
+     <!-- 5th theme -->
+
+    <style name="AppThemeRed" parent="android:Theme.Holo.Light">
+        <item name="android:buttonStyle">@style/ButtonRed</item>
+        <item name="android:windowBackground">@color/window_bg</item>
+        <item name="android:background">#00F2F2EC</item>
+        <item name="android:actionBarStyle">@style/ActionBarRed</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="ButtonRed" parent="android:style/Widget.Button">
+        <item name="android:background">@color/normal_button_bg</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:textColor">@color/normal_button_text_red</item>
+        <item name="android:textSize">@dimen/norm_button_text</item>
+    </style>
+
+    <style name="AdvButRed" parent="android:style/Widget.Button">
+        <item name="android:background">@color/adv_button_bg_red</item>
+        <item name="android:textSize">@dimen/adv_button_text</item>
+        <item name="android:padding">@dimen/adv_button_padding</item>
+        <item name="android:textColor">@color/adv_button_text_red</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+
+    <style name="ActionBarRed" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@color/transparent</item>
+        <item name="android:titleTextStyle">@style/TitleText</item>
+        <item name="android:logo">@drawable/logo_red</item>
+        <item name="android:textColor">#35444f</item>
+    </style>
+    
+
+</resources>
