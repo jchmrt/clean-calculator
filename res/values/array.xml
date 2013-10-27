@@ -15,4 +15,16 @@
      <item>d</item>
      <item>e</item>
    </string-array>
+   
+   
+   <string-array name="angleOptions">
+     <item>Degrees</item>
+     <item>Radians</item>
+   </string-array>
+ 
+   <string-array name="angleValues">
+     <item>a</item>
+     <item>b</item>
+   </string-array>
+   
  </resources>

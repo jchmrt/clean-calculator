@@ -10,7 +10,7 @@
     <color name="adv_button_normal">#10B286</color>
     <color name="adv_button_pressed">#F2F2EC</color>
     <color name="reset_button_normal">#35444f</color>
-    <color name="transparent">#0035444f</color>
+    <color name="transparent">#00000000</color>
     <color name="equal_button_bg_norm">#10B286</color>
     
     <color name="ics_blue">#33b5e5</color>

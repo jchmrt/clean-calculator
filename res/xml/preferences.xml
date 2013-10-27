@@ -1,20 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen 
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
+
+    <PreferenceCategory
+        android:summary="Change the looks of the calculator"
+        android:title="Themes" >
+        
+        <ListPreference
+            android:defaultValue="a"
+            android:entries="@array/themeOptions"
+            android:entryValues="@array/themeValues"
+            android:key="theme"
+            android:summary="Choose a theme"
+            android:title="Theme" />
+        
+    </PreferenceCategory>
     
-     <PreferenceCategory
-   android:summary="Change the looks of the calculator"
-   android:title="Themes" >
-   
-         <ListPreference
-     android:entries="@array/themeOptions"
-     android:entryValues="@array/themeValues"
-     android:defaultValue="a"
-     android:key="theme"
-     android:summary="Choose a theme."
-     android:title="Theme" />
-         
-   </PreferenceCategory>
-    
+    <PreferenceCategory
+        android:summary="Change the functionality of the calculator"
+        android:title="Function" >
+        
+        <EditTextPreference 
+    		android:defaultValue="10" 
+    		android:title="Precision" 
+    		android:summary="Choose the length of the result to be displayed (in numbers)"
+    		android:key="precision"
+    		android:inputType="number" />  
+    		
+        <ListPreference
+            android:defaultValue="a"
+            android:entries="@array/angleOptions"
+            android:entryValues="@array/angleValues"
+            android:key="angle"
+            android:summary="Choose whether to calculate with degrees or radians"
+            android:title="Degrees/radians" />
+
+        
+    </PreferenceCategory>
+
 </PreferenceScreen>

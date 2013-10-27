@@ -1,7 +1,13 @@
 package home.jmstudios.calc;
 
 import java.io.OutputStreamWriter;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.List;
 import java.util.Map;
+
+import com.udojava.evalex.Expression;
+import com.udojava.evalex.Expression.Function;
 
 import home.jmstudios.calc.R;
 import home.jmstudios.calc.R.id;
@@ -73,6 +79,13 @@ public class Main extends Activity {
 	String EditTextMsg, bin_num, hex_num, oct_num;
 
 	private String theme_settings;
+	
+	private String precision_str = "10";
+	private int precision;
+	private static int precision_default = 10;
+	
+	private String angle_settings;
+	private String angle_type = "degrees";
 
 	Float floatEditTextMsg;
 
@@ -83,6 +96,8 @@ public class Main extends Activity {
 	Vibrator vibrator;
 
 	int sdk = android.os.Build.VERSION.SDK_INT;
+	
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -134,6 +149,22 @@ public class Main extends Activity {
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(Main.this);
 		theme_settings = prefs.getString("theme", "a");
+		
+		precision_str = prefs.getString("precision", precision_str);
+		
+		angle_settings = prefs.getString("angle", "a");
+		
+		try {
+			precision = Integer.parseInt(precision_str);
+		} catch (Exception err) {
+			precision = precision_default;
+			Context context = getApplicationContext();
+			CharSequence text = "The specified precision is not a integer, change this in the settings.";
+			int duration = Toast.LENGTH_SHORT;
+			Toast toast = Toast.makeText(context, text, duration);
+			toast.show();
+		}
+		
 		if (((prefs.getString("theme", "a")).charAt(0) == 'b')) {
 			setTheme(R.style.AppThemeBlue);
 			setContentView(R.layout.mainblue);
@@ -155,6 +186,13 @@ public class Main extends Activity {
 		}
 		System.out.println(prefs.getString("theme", "lightgreen"));
 		super.onCreate(savedInstanceState);
+		
+		if (angle_settings.charAt(0) == 'a') {
+			angle_type = "degrees";
+		} 
+		else if (angle_settings.charAt(0) == 'b') {
+			angle_type = "radians";
+		}
 
 		// ActionBar.setIcon(R.drawable.pushed);
 
@@ -251,33 +289,107 @@ public class Main extends Activity {
 	// slidingdrawer.animateClose();
 	// en}
 
-	public void addText(String text) {
+	public void addText(String text, Boolean function, Boolean operator) {
 		int length = text.length();
 		
 		if (calc.length() == 0) {
-			calc += text;
-			editText.setText(calc);
-			editText.setSelection(length);
-		} else {
-			
-			if (editText.getSelectionStart() == editText.getSelectionEnd()) {
-				cursor = editText.getSelectionStart();
-				calc = calc.substring(0, cursor) + text + calc.substring(cursor);
+			if (!function) {
+				calc += text;
 				editText.setText(calc);
-				if (cursor == (editText.getText().length() - 1)) {
-					editText.setSelection(editText.getText().length());
-				} else {
-					editText.setSelection(cursor + length);
+				editText.setSelection(length);
+			} else {
+				calc = calc + text + ")";
+				editText.setText(calc);
+				editText.setSelection(length);
+			}
+		} else {
+			if (press != '=') {
+				if (editText.getSelectionStart() == editText.getSelectionEnd()) {
+					cursor = editText.getSelectionStart();
+					if (!function) {
+						calc = calc.substring(0, cursor) + text + calc.substring(cursor);
+						editText.setText(calc);
+						if (cursor == (editText.getText().length() - 1)) {
+							editText.setSelection(editText.getText().length());
+						} else {
+							editText.setSelection(cursor + length);
+						}
+					} 
+					else {
+						calc = calc.substring(0, cursor) + text + ")" + calc.substring(cursor);
+						editText.setText(calc);
+						editText.setSelection(cursor + length);
+					}
+				}
+				else {
+					int begin = editText.getSelectionStart();
+					int end = editText.getSelectionEnd();
+					if (!function) {
+						calc = calc.substring(0, begin) + text + calc.substring(end);
+						editText.setText(calc);
+						editText.setSelection(begin + length);
+					} else {
+						calc = calc.substring(0, begin) + text + ")" + calc.substring(end);
+						editText.setText(calc);
+						editText.setSelection(begin + length);
+					}
+				}
+			
+			}
+			else if (press =='=') {
+				press = ' ';
+				cursor = editText.getSelectionStart();
+				if (cursor == calc.length() && editText.getSelectionStart() == editText.getSelectionEnd() ) {
+					if (!function) {
+						if (!operator) {
+							calc = text;
+							editText.setText(calc);
+							editText.setSelection(length);
+						} else {
+							calc = calc + text;
+							editText.setText(calc);
+							editText.setSelection(calc.length());
+						}
+					} else {
+						int result_length = calc.length();
+						calc = text + calc + ")";
+						editText.setText(calc);
+						editText.setSelection(length + result_length);
+					}
+				}
+				else {
+					if (editText.getSelectionStart() == editText.getSelectionEnd()) {
+						cursor = editText.getSelectionStart();
+						if (!function) {
+							calc = calc.substring(0, cursor) + text + calc.substring(cursor);
+							editText.setText(calc);
+							if (cursor == (editText.getText().length() - 1)) {
+								editText.setSelection(editText.getText().length());
+							} else {
+								editText.setSelection(cursor + length);
+							}
+						} 
+						else {
+							calc = calc.substring(0, cursor) + text + ")" + calc.substring(cursor);
+							editText.setText(calc);
+							editText.setSelection(cursor + length);
+						}
+					}
+					else {
+						int begin = editText.getSelectionStart();
+						int end = editText.getSelectionEnd();
+						if (!function) {
+							calc = calc.substring(0, begin) + text + calc.substring(end);
+							editText.setText(calc);
+							editText.setSelection(begin + length);
+						} else {
+							calc = calc.substring(0, begin) + text + ")" + calc.substring(end);
+							editText.setText(calc);
+							editText.setSelection(begin + length);
+						}
+					}
 				}
 			}
-			else {
-				int begin = editText.getSelectionStart();
-				int end = editText.getSelectionEnd();
-				calc = calc.substring(0, begin) + text + calc.substring(end);
-				editText.setText(calc);
-				editText.setSelection(begin + length);
-			}
-			
 		}
 		
 	}
@@ -292,7 +404,7 @@ public class Main extends Activity {
 		calc = "";
 		}*/
 
-		addText("0");
+		addText("0", false, false);
 
 	}
 
@@ -302,7 +414,7 @@ public class Main extends Activity {
 		onClickListenerReset(buttonReset);
 		calc = "";
 	}*/
-		addText("1");
+		addText("1", false, false);
 	}
 
 	public void onClickListener2(View v) {
@@ -311,7 +423,7 @@ public class Main extends Activity {
 		onClickListenerReset(buttonReset);
 		calc = "";
 	}*/
-		addText("2");
+		addText("2", false, false);
 	}
 
 	public void onClickListener3(View v) {
@@ -320,7 +432,7 @@ public class Main extends Activity {
 		onClickListenerReset(buttonReset);
 		calc = "";
 	}*/
-		addText("3");
+		addText("3", false, false);
 	}
 
 	public void onClickListener4(View v) {
@@ -329,7 +441,7 @@ public class Main extends Activity {
 		onClickListenerReset(buttonReset);
 		calc = "";
 	}*/
-		addText("4");
+		addText("4", false, false);
 	}
 
 	public void onClickListener5(View v) {
@@ -338,7 +450,7 @@ public class Main extends Activity {
 		onClickListenerReset(buttonReset);
 		calc = "";
 	}*/
-		addText("5");
+		addText("5", false, false);
 	}
 
 	public void onClickListener6(View v) {
@@ -347,7 +459,7 @@ public class Main extends Activity {
 		onClickListenerReset(buttonReset);
 		calc = "";
 	}*/
-		addText("6");
+		addText("6", false, false);
 	}
 
 	public void onClickListener7(View v) {
@@ -356,7 +468,7 @@ public class Main extends Activity {
 		onClickListenerReset(buttonReset);
 		calc = "";
 	}*/
-		addText("7");
+		addText("7", false, false);
 	}
 
 	public void onClickListener8(View v) {
@@ -365,7 +477,7 @@ public class Main extends Activity {
 		onClickListenerReset(buttonReset);
 		calc = "";
 	}*/
-		addText("8");
+		addText("8", false, false);
 	}
 
 	public void onClickListener9(View v) {
@@ -374,27 +486,27 @@ public class Main extends Activity {
 		onClickListenerReset(buttonReset);
 		calc = "";
 	}*/
-		addText("9");
+		addText("9", false, false);
 	}
 
 	public void onClickListenerPlus(View v) {
 		press = '+';
-		addText("+");
+		addText("+", false, true);
 	}
 
 	public void onClickListenerMinus(View v) {
 		press = '-';
-		addText("-");
+		addText("-", false, true);
 	}
 
 	public void onClickListenerMultiply(View v) {
 		press = '*';
-		addText("*");
+		addText("*", false, true);
 	}
 
 	public void onClickListenerDivide(View v) {
 		press = '/';
-		addText("/");
+		addText("/", false, true);
 	}
 
 	public void onClickListenerPoint(View v) {
@@ -420,17 +532,141 @@ public class Main extends Activity {
 			if (sum == null) {
 				calc += "0.1";
 			} else {
-				addText(".");
+				addText(".", false, false);
 			}
 		}
 
 	}
 
 	public void onClickListenerEqual(View v) {
-
-		MathEval math = new MathEval();
 		try {
-			editText.setText(Double.toString(math.evaluate(calc)));
+			Expression e = new Expression(calc);
+			
+			e = e.setPrecision(precision);
+			
+				
+			e.addFunction(e.new Function("asin", 1) {
+			    @Override
+			    public BigDecimal eval(List<BigDecimal> parameters) {
+			    	BigDecimal parameter = parameters.get(0);
+			    	String parameter_str = parameter.toString();
+			    	double parameter_dbl =  Double.parseDouble(parameter_str);
+			    	double answer = Math.asin(parameter_dbl);
+			    	double answer_final;
+			    	if (angle_type == "radians") {
+			    		answer_final = answer;
+			    	}
+			    	else {
+			    		answer_final = Math.toDegrees(answer);
+			    	}
+			    	BigDecimal answer_bd = new BigDecimal(answer_final);
+			    	answer_bd =  answer_bd.setScale(precision, BigDecimal.ROUND_HALF_UP);
+			    	return answer_bd;  
+			    }
+			});
+			e.addFunction(e.new Function("acos", 1) {
+			    @Override
+			    public BigDecimal eval(List<BigDecimal> parameters) {
+			    	BigDecimal parameter = parameters.get(0);
+			    	String parameter_str = parameter.toString();
+			    	double parameter_dbl =  Double.parseDouble(parameter_str);
+			    	double answer = Math.acos(parameter_dbl);
+			    	double answer_final;
+			    	if (angle_type == "radians") {
+			    		answer_final = answer;
+			    	}
+			    	else {
+			    		answer_final = Math.toDegrees(answer);
+			    	}
+			    	BigDecimal answer_bd = new BigDecimal(answer_final);
+			    	answer_bd =  answer_bd.setScale(precision, BigDecimal.ROUND_HALF_UP);
+			    	return answer_bd; 
+			    }
+			});
+			e.addFunction(e.new Function("atan", 1) {
+			    @Override
+			    public BigDecimal eval(List<BigDecimal> parameters) {
+			    	BigDecimal parameter = parameters.get(0);
+			    	String parameter_str = parameter.toString();
+			    	double parameter_dbl =  Double.parseDouble(parameter_str);
+			    	double answer = Math.atan(parameter_dbl);
+			    	double answer_final;
+			    	if (angle_type == "radians") {
+			    		answer_final = answer;
+			    	}
+			    	else {
+			    		answer_final = Math.toDegrees(answer);
+			    	}
+			    	BigDecimal answer_bd = new BigDecimal(answer_final);
+			    	answer_bd =  answer_bd.setScale(precision, BigDecimal.ROUND_HALF_UP);
+			    	return answer_bd;  
+			    }
+			});
+			e.addFunction(e.new Function("sin", 1) {
+			    @Override
+			    public BigDecimal eval(List<BigDecimal> parameters) {
+			    	BigDecimal parameter = parameters.get(0);
+			    	String parameter_str = parameter.toString();
+			    	double parameter_dbl =  Double.parseDouble(parameter_str);
+			    	double parameter_final;
+			    	System.out.println(angle_settings);
+			    	if (angle_type == "radians") {
+			    		parameter_final = parameter_dbl;
+			    	}
+			    	else {
+			    		parameter_final = Math.toRadians(parameter_dbl);
+			    	}
+			    	double answer = Math.sin(parameter_final);
+			    	System.out.println(answer);
+			    	BigDecimal answer_bd = new BigDecimal(answer);
+			    	answer_bd =  answer_bd.setScale(precision, BigDecimal.ROUND_HALF_UP);
+			    	return answer_bd;           
+			    }
+			});
+			e.addFunction(e.new Function("cos", 1) {
+			    @Override
+			    public BigDecimal eval(List<BigDecimal> parameters) {
+			    	BigDecimal parameter = parameters.get(0);
+			    	String parameter_str = parameter.toString();
+			    	double parameter_dbl =  Double.parseDouble(parameter_str);
+			    	double parameter_final;
+			    	if (angle_type == "radians") {
+			    		parameter_final = parameter_dbl;
+			    	}
+			    	else {
+			    		parameter_final = Math.toRadians(parameter_dbl);
+			    	}
+			    	double answer = Math.cos(parameter_final);
+			    	System.out.println(answer);
+			    	BigDecimal answer_bd = new BigDecimal(answer);
+			    	answer_bd =  answer_bd.setScale(precision, BigDecimal.ROUND_HALF_UP);
+			    	return answer_bd;            
+			    }
+			});
+			e.addFunction(e.new Function("tan", 1) {
+			    @Override
+			    public BigDecimal eval(List<BigDecimal> parameters) {
+			    	BigDecimal parameter = parameters.get(0);
+			    	String parameter_str = parameter.toString();
+			    	double parameter_dbl =  Double.parseDouble(parameter_str);
+			    	double parameter_final;
+			    	if (angle_type == "radians") {
+			    		parameter_final = parameter_dbl;
+			    	}
+			    	else {
+			    		parameter_final = Math.toRadians(parameter_dbl);
+			    	}
+			    	double answer = Math.tan(parameter_final);
+			    	System.out.println(answer);
+			    	BigDecimal answer_bd = new BigDecimal(answer);
+			    	answer_bd =  answer_bd.setScale(precision, BigDecimal.ROUND_HALF_UP);
+			    	return answer_bd;      
+			    }
+			});
+			BigDecimal result_bd = e.eval();
+			
+			String tmp_result = result_bd.toPlainString();
+			editText.setText(tmp_result);
 			calc = editText.getText().toString();
 			press = '=';
 			editText.setSelection(editText.getText().length());
@@ -445,51 +681,51 @@ public class Main extends Activity {
 	}
 
 	public void onClickListener_sin(View v) {
-		addText("sin(");
+		addText("sin(", true, false);
 	}
 
 	public void onClickListener_cos(View v) {
-		addText("cos(");
+		addText("cos(", true, false);
 	}
 
 	public void onClickListener_tan(View v) {
-		addText("tan(");
+		addText("tan(", true, false);
 	}
 
 	public void onClickListener_asin(View v) {
-		addText("asin(");
+		addText("asin(", true, false);
 	}
 
 	public void onClickListener_acos(View v) {
-		addText("acos(");
+		addText("acos(", true, false);
 	}
 
 	public void onClickListener_atan(View v) {
-		addText("atan(");
+		addText("atan(", true, false);
 	}
 
 	public void onClickListener_squared_2(View v) {
-		addText("^2");
+		addText("^2", false, true);
 	}
 
 	public void onClickListener_exp(View v) {
-		addText("^");
+		addText("^", false, true);
 	}
 
 	public void onClickListener_root(View v) {
-		addText("sqrt(");
+		addText("sqrt(", true, false);
 	}
 
 	public void onClickListener_openpar(View v) {
-		addText("(");
+		addText("(", false, false);
 	}
 
 	public void onClickListener_closepar(View v) {
-		addText(")");
+		addText(")", false, false);
 	}
 
 	public void onClickListener_mod(View v) {
-		addText("%");
+		addText("%", false, true);
 	}
 
 	public void onClickListener_pi(View v) {
@@ -497,7 +733,7 @@ public class Main extends Activity {
 		onClickListenerReset(buttonReset);
 		calc = "";
 	}*/
-		addText("3.14159265359");
+		addText("pi", false, false);
 	}
 
 	public void onClickListener_del(View v) {
@@ -561,19 +797,19 @@ public class Main extends Activity {
 	}
 
 	public void onClickListener_dec(View v) {
-		addText("dec(");
+		addText("dec(", true, false);
 	}
 
 	public void onClickListener_bin(View v) {
-		addText("bin(");
+		addText("bin(", true, false);
 	}
 
 	public void onClickListener_hex(View v) {
-		addText("hex(");
+		addText("hex(", true, false);
 	}
 
 	public void onClickListener_oct(View v) {
-		addText("oct(");
+		addText("oct(", true, false);
 	}
 
 	/*
