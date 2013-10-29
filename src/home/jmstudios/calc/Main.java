@@ -141,6 +141,21 @@ public class Main extends Activity {
 			startActivity(intent);
 			System.out.println("change");
 		}
+		String new_precision_settings = prefs.getString("precision", precision_str);
+		if (new_precision_settings != precision_str) {
+			Intent intent = getIntent();
+			finish();
+			startActivity(intent);
+			System.out.println("change");
+		}
+		String new_angle_settings = prefs.getString("angle", "a");
+		if (new_angle_settings != angle_settings) {
+			Intent intent = getIntent();
+			finish();
+			startActivity(intent);
+			System.out.println("change");
+		}
+
 
 	}
 
@@ -542,7 +557,7 @@ public class Main extends Activity {
 		try {
 			Expression e = new Expression(calc);
 			
-			e = e.setPrecision(precision);
+			//e = e.setPrecision(precision);
 			
 				
 			e.addFunction(e.new Function("asin", 1) {
@@ -663,6 +678,34 @@ public class Main extends Activity {
 			    	return answer_bd;      
 			    }
 			});
+			e.addFunction(e.new Function("SQRT", 1) {
+				@Override
+				public BigDecimal eval(List<BigDecimal> parameters) {
+					/*
+					 * From The Java Programmers Guide To numerical Computing
+					 * (Ronald Mak, 2003)
+					 */
+					BigDecimal x = parameters.get(0);
+					if (x.compareTo(BigDecimal.ZERO) == 0) {
+						return new BigDecimal(0);
+					}
+					BigInteger n = x.movePointRight(precision << 1)
+							.toBigInteger();
+
+					int bits = (n.bitLength() + 1) >> 1;
+					BigInteger ix = n.shiftRight(bits);
+					BigInteger ixPrev;
+
+					do {
+						ixPrev = ix;
+						ix = ix.add(n.divide(ix)).shiftRight(1);
+						// Give other threads a chance to work;
+						Thread.yield();
+					} while (ix.compareTo(ixPrev) != 0);
+
+					return new BigDecimal(ix, precision);
+				}
+			});
 			BigDecimal result_bd = e.eval();
 			
 			String tmp_result = result_bd.toPlainString();
@@ -733,7 +776,7 @@ public class Main extends Activity {
 		onClickListenerReset(buttonReset);
 		calc = "";
 	}*/
-		addText("pi", false, false);
+		addText("PI", false, false);
 	}
 
 	public void onClickListener_del(View v) {

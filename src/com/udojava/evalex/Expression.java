@@ -705,14 +705,14 @@ public class Expression {
 				return toRound.setScale(precision, mc.getRoundingMode());
 			}
 		});
-		addFunction(new Function("SQRT", 1) {
+		/*addFunction(new Function("SQRT", 1) {
 			@Override
 			public BigDecimal eval(List<BigDecimal> parameters) {
 				/*
 				 * From The Java Programmers Guide To numerical Computing
 				 * (Ronald Mak, 2003)
 				 */
-				BigDecimal x = parameters.get(0);
+				/*BigDecimal x = parameters.get(0);
 				if (x.compareTo(BigDecimal.ZERO) == 0) {
 					return new BigDecimal(0);
 				}
@@ -736,7 +736,7 @@ public class Expression {
 
 				return new BigDecimal(ix, mc.getPrecision());
 			}
-		});
+		});*/
 
 		variables.put("PI", PI);
 
