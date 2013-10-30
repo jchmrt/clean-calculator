@@ -3,6 +3,7 @@ package home.jmstudios.calc;
 import java.io.OutputStreamWriter;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.MathContext;
 import java.util.List;
 import java.util.Map;
 
@@ -557,9 +558,16 @@ public class Main extends Activity {
 		try {
 			Expression e = new Expression(calc);
 			
-			//e = e.setPrecision(precision);
+			e = e.setPrecision(0);
 			
-				
+			e.addOperator(e.new Operator("/", 30, true) {
+				@Override
+				public BigDecimal eval(BigDecimal v1, BigDecimal v2) {
+					MathContext mc = new MathContext(precision);
+					BigDecimal answer = v1.divide(v2, mc);
+					return answer;
+				}
+			});
 			e.addFunction(e.new Function("asin", 1) {
 			    @Override
 			    public BigDecimal eval(List<BigDecimal> parameters) {

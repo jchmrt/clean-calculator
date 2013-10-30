@@ -25,7 +25,7 @@
         <EditTextPreference 
     		android:defaultValue="10" 
     		android:title="Precision" 
-    		android:summary="Choose the length of the result to be displayed (in numbers)"
+    		android:summary="Choose the length of the result to be displayed (WARNING: if you set this to a number above 500, performance might suffer!)"
     		android:key="precision"
     		android:inputType="number" />  
     		
