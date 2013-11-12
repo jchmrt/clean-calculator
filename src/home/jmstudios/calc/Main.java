@@ -54,7 +54,7 @@ public class Main extends Activity {
 	LinearLayout linearlayout1;
 
 	boolean wrong = false, firsttime = true, visbutton = false, vs = false,
-			js = false, r = false, b = false;
+			js = false, r = false, b = false, no_calc = true;
 
 	Button button0, button1, button2, button3, button4, button5, button6,
 			button7, button8, button9, buttonPlus, buttonMinus, buttonMultiply,
@@ -307,6 +307,10 @@ public class Main extends Activity {
 
 	public void addText(String text, Boolean function, Boolean operator) {
 		int length = text.length();
+		if (!no_calc) {
+			calc = editText.getText().toString();
+		}
+		no_calc = false;
 		
 		if (calc.length() == 0) {
 			if (!function) {
@@ -555,6 +559,7 @@ public class Main extends Activity {
 	}
 
 	public void onClickListenerEqual(View v) {
+		calc = editText.getText().toString();
 		try {
 			Expression e = new Expression(calc);
 			
@@ -719,6 +724,7 @@ public class Main extends Activity {
 			String tmp_result = result_bd.toPlainString();
 			editText.setText(tmp_result);
 			calc = editText.getText().toString();
+			no_calc = false;
 			press = '=';
 			editText.setSelection(editText.getText().length());
 		} catch (Exception err) {
@@ -844,6 +850,7 @@ public class Main extends Activity {
 
 		editText.setText(result.toString());
 		editText.setSelection(editText.getText().length());
+		no_calc = true;
 		calc = "";
 	}
 
