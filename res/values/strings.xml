@@ -15,7 +15,7 @@
     <string name="title_activity_about">"About"</string>
 	<string name="playstore">"<u>Rate this app! It helps us a lot to keep the updates coming.</u>"</string>
 	<string name="playstoredon">"<u>Please download the donation version of this app in the playstore if you can spare a buck.</u>"</string>
-	<string name="beta">"BETA"</string>
+	<!--<string name="beta">"BETA"</string>-->
 	<string name="mail">"<u>Mail us your feedback or suggestions.</u>"</string>
 	
 </resources>

@@ -52,14 +52,6 @@
                     android:textColor="#f2f2ec"
                     android:textSize="30sp" />
 
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="top"
-                    android:text="BETA"
-                    android:textColor="#a2f7d0" />
-
             </LinearLayout>
 
             <LinearLayout
