@@ -87,7 +87,7 @@
                             android:onClick="onClickListenerReset"
                             android:padding="10dp"
                             android:text="CE"
-                            android:textColor="@color/adv_button_text_purple" />
+                            android:textSize="20sp" />
 
                     </LinearLayout>
 
