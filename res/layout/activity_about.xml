@@ -38,7 +38,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:text="Clean"
+                    android:text="@string/clean"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textColor="#a2f7d0"
                     android:textSize="30sp" />
@@ -47,7 +47,7 @@
                     android:id="@+id/textView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Calculator"
+                    android:text="@string/app_name"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textColor="#f2f2ec"
                     android:textSize="30sp" />
