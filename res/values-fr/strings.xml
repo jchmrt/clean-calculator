@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">"Calculatrice"</string>
+    
+    <string name="menu_about">"À propos"</string>
+    <string name="menu_settings">"Paramètres"</string>
+    
+    <string name="title_activity_settings">"Paramètres"</string>
+    
+    <string name="title_activity_about">"À propos"</string>
+    <string name="clean">"Clean"</string>
+    <string name="or">"OU"</string>
+	<string name="playstore">"<u>Notez cette application ! Cela nous encouragerais beaucoup pour continuer à la mettre à jour.</u>"</string>
+	<string name="playstoredon">"<u>S\'il vous plait, téléchargez la version payante sur le play store si vous pouvez investir en nous.</u>"</string>
+	<string name="mail">"<u>Envoyez nous vos avis ou suggestion par email.</u>"</string>
+	
+</resources>

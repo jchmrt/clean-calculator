@@ -100,7 +100,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="16dp"
                 android:layout_marginTop="16dp"
-                android:text="OR"
+                android:text="@string/or"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#ccc"
                 android:textSize="24sp" />
@@ -120,17 +120,16 @@
                 android:textAlignment="center"/>
 
 			<TextView
-                android:id="@+id/TextView02"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="16dp"
-                android:layout_marginTop="16dp"
-                android:text="OR"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="#ccc"
-                android:textSize="24sp" />
-			
+			    android:id="@+id/TextView02"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_gravity="center_horizontal"
+			    android:layout_marginBottom="16dp"
+			    android:layout_marginTop="16dp"
+			    android:text="@string/or"
+			    android:textAppearance="?android:attr/textAppearanceMedium"
+			    android:textColor="#ccc"
+			    android:textSize="24sp" />
 			
             <TextView
                 android:id="@+id/textView8"
