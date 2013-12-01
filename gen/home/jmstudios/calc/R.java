@@ -143,18 +143,27 @@ public final class R {
         public static final int menu=0x7f0a0001;
     }
     public static final class string {
+        public static final int angle_summary=0x7f08000f;
+        public static final int angle_title=0x7f080010;
         public static final int app_name=0x7f080000;
-        public static final int clean=0x7f080009;
+        public static final int clean=0x7f080012;
         public static final int delete_numbers=0x7f080002;
         public static final int exp=0x7f080004;
-        public static final int mail=0x7f08000c;
+        public static final int function_category_summary=0x7f08000b;
+        public static final int function_category_title=0x7f08000c;
+        public static final int mail=0x7f080015;
         public static final int menu_about=0x7f080005;
         public static final int menu_settings=0x7f080006;
         public static final int pi=0x7f080003;
-        public static final int playstore=0x7f08000a;
-        public static final int playstoredon=0x7f08000b;
+        public static final int playstore=0x7f080013;
+        public static final int playstoredon=0x7f080014;
+        public static final int precision_summary=0x7f08000d;
+        public static final int precision_title=0x7f08000e;
         public static final int square_root_symbol=0x7f080001;
-        public static final int title_activity_about=0x7f080008;
+        public static final int theme_category_summary=0x7f080008;
+        public static final int theme_summary=0x7f080009;
+        public static final int theme_title=0x7f08000a;
+        public static final int title_activity_about=0x7f080011;
         public static final int title_activity_settings=0x7f080007;
     }
     public static final class style {
