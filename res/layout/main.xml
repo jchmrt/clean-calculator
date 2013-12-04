@@ -18,7 +18,6 @@
             android:id="@+id/linearLayout1"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
-            android:onClick="onClickListenerView"
             android:orientation="vertical"
             android:paddingBottom="36dp" >
 
