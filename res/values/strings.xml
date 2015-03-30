@@ -17,6 +17,12 @@
     <string name="theme_title">"Theme"</string>
     <string name="function_category_summary">"Change the functionality of the calculator"</string>
     <string name="function_category_title">"Function"</string>
+    <string name="bar_category_summary">"Choose whether you want colored navigation and/or notification bars"</string>
+    <string name="bar_category_title">"Colored bars"</string>
+    <string name="colored_notificationbar_title">"Colored notification bar"</string>
+    <string name="colored_notificationbar_summary">"Check this box for a colored notification bar. This will only work for android 4.4 and higher"</string>
+    <string name="colored_navigationbar_title">"Colored navigation bar"</string>
+    <string name="colored_navigationbar_summary">"Check this box for a colored navigation bar. This will only work for android 5.0 and higher"</string>
     <string name="precision_summary">"Choose the length of the result to be displayed (WARNING: if you set this to a number above 500, performance might suffer!)"</string>
     <string name="precision_title">"Precision"</string>
     <string name="angle_summary">"Choose whether to calculate with degrees or radians"</string>

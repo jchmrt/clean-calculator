@@ -39,5 +39,24 @@
 
         
     </PreferenceCategory>
+    
+        <PreferenceCategory
+        android:summary="@string/bar_category_summary"
+        android:title="@string/bar_category_title" >
+        
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:title="@string/colored_notificationbar_title"
+                android:summary="@string/colored_notificationbar_summary"
+                android:key="colored_notification_bar"/>
+        
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:title="@string/colored_navigationbar_title"
+                android:summary="@string/colored_navigationbar_summary"
+                android:key="colored_navigation_bar"/>
+
+    </PreferenceCategory>
+    
 
 </PreferenceScreen>

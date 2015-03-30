@@ -6,16 +6,14 @@ import java.math.BigInteger;
 import java.math.MathContext;
 import java.util.List;
 import java.util.Map;
-
 import com.udojava.evalex.Expression;
 import com.udojava.evalex.Expression.Function;
-
 import home.jmstudios.calc.R;
 import home.jmstudios.calc.R.id;
 import home.jmstudios.calc.R.layout;
 import home.jmstudios.calc.R.menu;
 import home.jmstudios.calc.R.style;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.ClipData;
@@ -24,6 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
@@ -35,6 +34,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnLongClickListener;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -80,6 +80,7 @@ public class Main extends Activity {
 	String EditTextMsg, bin_num, hex_num, oct_num;
 
 	private String theme_settings;
+	private boolean colored_navigation_bar, colored_notification_bar;
 	
 	private String precision_str = "10";
 	private int precision;
@@ -136,7 +137,11 @@ public class Main extends Activity {
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(Main.this);
 		String new_theme_settings = prefs.getString("theme", "a");
-		if (new_theme_settings != theme_settings) {
+		boolean new_colored_notification_bar = prefs.getBoolean("colored_notification_bar", true);
+		boolean new_colored_navigation_bar = prefs.getBoolean("colored_navigation_bar", false);
+		if (new_theme_settings != theme_settings
+				|| new_colored_notification_bar != colored_notification_bar
+				|| new_colored_navigation_bar != colored_navigation_bar) {
 			Intent intent = getIntent();
 			finish();
 			startActivity(intent);
@@ -160,11 +165,15 @@ public class Main extends Activity {
 
 	}
 
+	@SuppressLint("NewApi")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(Main.this);
 		theme_settings = prefs.getString("theme", "a");
+		colored_notification_bar = prefs.getBoolean("colored_notification_bar", true);
+		colored_navigation_bar = prefs.getBoolean("colored_navigation_bar", false);
+		String theme = "standard";
 		
 		precision_str = prefs.getString("precision", precision_str);
 		
@@ -184,23 +193,28 @@ public class Main extends Activity {
 		if (((prefs.getString("theme", "a")).charAt(0) == 'b')) {
 			setTheme(R.style.AppThemeBlue);
 			setContentView(R.layout.mainblue);
+			theme = "blue";
 
 		} else if (((prefs.getString("theme", "a")).charAt(0) == 'c')) {
 			setTheme(R.style.AppThemeOrange);
 			setContentView(R.layout.mainorange);
+			theme = "orange";
 
 		} else if (((prefs.getString("theme", "a")).charAt(0) == 'd')) {
 			setTheme(R.style.AppThemePurple);
 			setContentView(R.layout.mainpurple);
+			theme = "purple";
 
 		} else if (((prefs.getString("theme", "a")).charAt(0) == 'e')) {
 			setTheme(R.style.AppThemeRed);
 			setContentView(R.layout.mainred);
+			theme = "red";
 
 		} else {
 			setContentView(R.layout.main);
+			theme = "standard";
 		}
-		System.out.println(prefs.getString("theme", "lightgreen"));
+		//System.out.println(prefs.getString("theme", "lightgreen"));
 		super.onCreate(savedInstanceState);
 		
 		if (angle_settings.charAt(0) == 'a') {
@@ -298,7 +312,41 @@ public class Main extends Activity {
 	            return true;
 	        }
 	    });
-
+		
+	    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			Window window = this.getWindow();
+			window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+			window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+			if (colored_notification_bar) {
+				int color = -1;
+				if (theme == "blue")
+					color = R.color.statusbarblue;
+				else if (theme == "orange")
+					color = R.color.statusbarorange;
+				else if (theme == "purple")
+					color = R.color.statusbarpurple;
+				else if (theme == "red")
+					color = R.color.statusbarred;
+				else
+					color = R.color.statusbar;
+				window.setStatusBarColor(this.getResources().getColor(color));
+			}
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
+					&& colored_navigation_bar) {
+				int color = -1;
+				if (theme == "blue")
+					color = R.color.navigationbarblue;
+				else if (theme == "orange")
+					color = R.color.navigationbarorange;
+				else if (theme == "purple")
+					color = R.color.navigationbarpurple;
+				else if (theme == "red")
+					color = R.color.navigationbarred;
+				else
+					color = R.color.navigationbar;
+				window.setNavigationBarColor(this.getResources().getColor(color));	    
+			}
+	    }
 	}
 
 	// public void onClickListenerView(View v) {

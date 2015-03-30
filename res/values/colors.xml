@@ -7,6 +7,18 @@
     <color name="window_bg">#FFF2F2EC</color>
     <color name="window_bg_dark">#FF2F2F2F</color>
     
+    <color name="statusbar">#FF067355</color>    
+    <color name="statusbarblue">#FF217594</color>    
+    <color name="statusbarorange">#FFC38F27</color>    
+    <color name="statusbarpurple">#FF76478E</color>    
+    <color name="statusbarred">#FFBA3232</color>
+    
+    <color name="navigationbar">#FF078B67</color>    
+    <color name="navigationbarblue">#FF33b5e5</color>    
+    <color name="navigationbarorange">#FFFFBB33</color>    
+    <color name="navigationbarpurple">#FFAA66CC</color>    
+    <color name="navigationbarred">#FFff4444</color>
+    
     <color name="adv_button_normal">#10B286</color>
     <color name="adv_button_pressed">#F2F2EC</color>
     
